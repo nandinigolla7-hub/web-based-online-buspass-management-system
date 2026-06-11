@@ -71,6 +71,9 @@ p{
 </form>
 
 <p style="color:red" th:text="${error}"></p>
+<script th:if="${error}">
+    alert('[[${error}]]');
+</script>
 
 </body>
 </html>

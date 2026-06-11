@@ -4,22 +4,39 @@
 <meta charset="UTF-8">
 <title>Bus Pass Renewal</title><
 <style>
-	body{
-	    background-image:url('/images/Rbus.jpg');
-	    background-size:cover;
-	    background-repeat:no-repeat;
-	    background-position:center;
-	    background-attachment:fixed;
-	}
+body{
+    background-image:url('/images/Rbus.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-attachment:fixed;
+}
 
 h1{
-    text-align:center;
+	text-align:center;
     color:#003366;
 }
 
 form{
-    width:450px;
-    margin:auto;
+    width:700px;
+    margin:30px auto;
+    background:rgba(255,255,255,0.90);
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+}
+
+label{
+    display:inline-block;
+    width:180px;
+    font-weight:bold;
+}
+
+input,
+select{
+    width:250px;
+    height:32px;
+    box-sizing:border-box;
 }
 
 button{
@@ -28,6 +45,8 @@ button{
     border:none;
     border-radius:5px;
     cursor:pointer;
+    padding:10px 20px;
+    margin-left:185px;
 }
 
 button:hover{
@@ -43,6 +62,9 @@ a:hover{
     text-decoration:underline;
 }
 
+#studentSection{
+    margin-left:0;
+}
 </style>
 <script>
 	function toggleFields() {
@@ -97,114 +119,112 @@ function togglePreviousPass() {
 
 <h1>Online Bus Pass Renewal System</h1>
 <form action="/register"
-	        method="post"
-	        enctype="multipart/form-data">
-    Name:
-    <input type="text" name="name" required><br><br>
-	Date of Birth:
-	<input type="date" name="dateOfBirth" required>
+      method="post"
+      enctype="multipart/form-data">
 
-	<br><br>
+    <label>Name :</label>
+    <input type="text" name="name" required>
+    <br><br>
 
-	Age:
-	<input type="number" name="age" required>
+    <label>Date of Birth :</label>
+    <input type="date" name="dateOfBirth" required>
+    <br><br>
 
-	<br><br>
+    <label>Age :</label>
+    <input type="number" name="age" required>
+    <br><br>
 
-    Email:
-    <input type="email" name="email" required><br><br>
+    <label>Email :</label>
+    <input type="email" name="email" required>
+    <br><br>
 
-    Mobile:
-	<input type="tel"
-	       name="mobile"
-	       pattern="[0-9]{10}"
-	       maxlength="10"
-	       required
-	       title="Mobile number must be exactly 10 digits">
-		   <br><br>
+    <label>Mobile :</label>
+    <input type="tel"
+           name="mobile"
+           pattern="[0-9]{10}"
+           maxlength="10"
+           required
+           title="Mobile number must be exactly 10 digits">
+    <br><br>
 
-    Password:
-    <input type="password" name="password" required><br><br>
-	User Type:
+    <label>Password :</label>
+    <input type="password" name="password" required>
+    <br><br>
 
-	<select id="userType" name="userType"
-	        onchange="toggleFields()">
+    <label>User Type :</label>
+    <select id="userType"
+            name="userType"
+            onchange="toggleFields()">
+        <option value="Student">Student</option>
+        <option value="Passenger">Passenger</option>
+    </select>
 
-	    <option value="Student">Student</option>
-	    <option value="Passenger">Passenger</option>
+    <br><br>
 
-	</select>
-	<div id="studentSection">
-		<br><br>
+    <div id="studentSection">
 
-	    Institution Type:
+        <label>Institution Type :</label>
+        <select name="institutionType">
+            <option value="School">School</option>
+            <option value="College">College</option>
+        </select>
 
-	    <select name="institutionType">
-	        <option value="School">School</option>
-	        <option value="College">College</option>
-	    </select>
+        <br><br>
 
-	    <br><br>
+        <label>Institution Name :</label>
+        <input type="text"
+               name="institutionName"
+               required>
 
-	    Institution Name:
+        <br><br>
 
-	    <input type="text" name="institutionName" required>
+        <label>Institution Area :</label>
+        <input type="text"
+               name="institutionArea">
 
-	    <br><br>
+        <br><br>
 
-	    Institution Area:
+        <label>Institution Code :</label>
+        <input type="text"
+               name="institutionCode">
 
-	    <input type="text" name="institutionArea">
+        <br><br>
 
-	    <br><br>
+        <label>Class / Year :</label>
+        <input type="number"
+               name="classLevel"
+               required>
 
-	    Institution Code:
+        <br><br>
 
-	    <input type="text" name="institutionCode">
+    </div>
 
-	    <br><br>
+    <label>Pass Type :</label>
+    <select name="passType">
+        <option value="Monthly">Monthly</option>
+        <option value="Quarterly">Quarterly</option>
+    </select>
 
-	    Class / Year:
+    <br><br>
 
-	    <input type="number" name="classLevel" required>
+    <label>Photo :</label>
+    <input type="file"
+           name="photofile"
+           accept="image/*"
+           required>
 
-	    <br><br>
-
-	</div>
-
-	Pass Type:
-
-	<select name="passType">
-
-	    <option value="Monthly">Monthly</option>
-
-	    <option value="Quarterly">Quarterly</option>
-
-	</select>
-	<br><br>
-	Photo:
-	    <input type="file"
-	           name="photofile"
-	           accept="image/*"
-	           required>
-	    <br><br>
-
+    <br><br>
 
     <button type="submit">Register</button>
 
 </form>
-<br>
-</form>
-
-<br>
-
 <div style="text-align:center;">
 
     <a href="/login"><b>Already Registered?<b></a>
 
     &nbsp;
 
-    <a href="/login"><b>Login Here<b>/a>
+    <a href="/login"><b>Login Here<b></a>
 
     <br><br>
 
