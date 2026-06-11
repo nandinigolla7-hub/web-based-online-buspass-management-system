@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>My Pass</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+	background-image:url('/images/Rbus.jpg');
+				background-size:cover;
+					    background-repeat:no-repeat;
+					    background-position:center;
+					    background-attachment:fixed;
+    text-align: center;
+}
+
+h2{
+    color: #003366;
+}
+
+table{
+    margin: auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th{
+    background-color: #0066cc;
+    color: white;
+    padding: 10px;
+}
+
+td{
+    padding: 10px;
+}
+
+table, th, td{
+    border: 1px solid black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>My Bus Pass Details</h2>
+
+<table border="1">
+
+<tr>
+    <th>Name</th>
+    <td th:text="${user.name}"></td>
+</tr>
+
+<tr>
+    <th>Email</th>
+    <td th:text="${user.email}"></td>
+</tr>
+
+<tr>
+    <th>User Type</th>
+    <td th:text="${user.userType}"></td>
+</tr>
+
+<tr>
+    <th>Pass Type</th>
+    <td th:text="${user.passType}"></td>
+</tr>
+
+<tr>
+    <th>Expiry Date</th>
+    <td th:text="${user.expiryDate}"></td>
+</tr>
+
+<tr>
+    <th>Status</th>
+    <td th:text="${user.approvalStatus}"></td>
+</tr>
+
+</table>
+
+</body>
+</html>

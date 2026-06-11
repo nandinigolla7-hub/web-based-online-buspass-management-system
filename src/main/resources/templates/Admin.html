@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+	background-image:url('/images/Rbus.jpg');
+				background-size:cover;
+					    background-repeat:no-repeat;
+					    background-position:center;
+					    background-attachment:fixed;
+    text-align: center;
+}
+
+h1{
+    color: #003366;
+}
+
+table{
+    margin: auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th{
+    background-color: #0066cc;
+    color: white;
+    padding: 10px;
+}
+
+td{
+    padding: 10px;
+}
+
+table, th, td{
+    border: 1px solid black;
+}
+
+input[type="text"]{
+    padding: 8px;
+}
+
+button{
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #004999;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    background-color: #28a745;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin: 2px;
+    display: inline-block;
+}
+
+a:hover{
+    opacity: 0.9;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Bus Pass Renewal Requests</h1>
+
+<a href="/adminLogout">Logout</a>
+
+<br><br>
+
+<form action="/search">
+
+    <input type="text"
+           name="keyword"
+           placeholder="Search User">
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+<br>
+
+<table border="1">
+
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>User Type</th>
+    <th>Pass Type</th>
+    <th>Expiry Date</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+<tr th:each="u : ${users}">
+
+    <td th:text="${u.id}"></td>
+    <td th:text="${u.name}"></td>
+    <td th:text="${u.email}"></td>
+    <td th:text="${u.userType}"></td>
+    <td th:text="${u.passType}"></td>
+    <td th:text="${u.expiryDate}"></td>
+    <td th:text="${u.approvalStatus}"></td>
+
+    <td>
+
+        <a th:href="@{/approve/{id}(id=${u.id})}">
+            Approve
+        </a>
+
+        <a th:href="@{/rejectRenewal/{id}(id=${u.id})}">
+            Reject
+        </a>
+
+    </td>
+
+</tr>
+
+</table>
+
+</body>
+</html>

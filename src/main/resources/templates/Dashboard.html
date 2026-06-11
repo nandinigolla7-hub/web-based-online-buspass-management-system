@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+	background-image:url('/images/bus2.jpg');
+		background-size:cover;
+			    background-repeat:no-repeat;
+			    background-position:center;
+			    background-attachment:fixed;
+    text-align:center;
+}
+
+h1{
+    color:#003366;
+}
+
+h2{
+    color:#0066cc;
+}
+
+a{
+    text-decoration:none;
+    color:white;
+    background-color:#0066cc;
+    padding:10px 20px;
+    border-radius:5px;
+}
+
+a:hover{
+    background-color:#004999;
+}
+
+</style>
+
+</head>
+
+<body>
+
+    <h2>
+        Welcome <span th:text="${name}"></span>
+    </h2>
+
+    <h1>Bus Pass Management System</h1>
+
+    <hr>
+
+    <br>
+
+    <a href="/applyPass">Apply New Pass</a>
+
+    <br><br><br>
+
+    <a href="/renewPass">Renew Pass</a>
+
+    <br><br><br>
+
+
+    <a href="/logout">Logout</a>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Bus Pass</title>
+
+<style>
+
+body{
+font-family:Arial;
+text-align:center;
+}
+
+.card{
+width:500px;
+margin:auto;
+border:2px solid black;
+padding:20px;
+border-radius:10px;
+}
+
+button{
+padding:10px 20px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="card" id="pass">
+
+<h2>Bus Pass</h2>
+
+<p><b>Name:</b>
+<span th:text="${user.name}"></span></p>
+
+<p><b>Pass Number:</b>
+<span th:text="${user.passNumber}"></span></p>
+
+<p><b>User Type:</b>
+<span th:text="${user.userType}"></span></p>
+
+<p><b>Pass Type:</b>
+<span th:text="${user.passType}"></span></p>
+
+<p><b>Issue Date:</b>
+<span th:text="${user.issueDate}"></span></p>
+
+<p><b>Expiry Date:</b>
+<span th:text="${user.expiryDate}"></span></p>
+
+<img th:src="@{'/uploads/' + ${user.photo}}"
+     width="120">
+
+<br><br>
+
+<button onclick="window.print()">
+Download Pass
+</button>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apply Bus Pass</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+	background-image:url('/images/bus3.jpg');
+		background-size:cover;
+			    background-repeat:no-repeat;
+			    background-position:center;
+			    background-attachment:fixed;
+}
+
+.container{
+    width:700px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+}
+
+h2{
+    text-align:center;
+    color:darkblue;
+}
+
+label{
+    font-weight:bold;
+}
+
+input,select{
+    width:100%;
+    padding:8px;
+    margin-top:5px;
+    margin-bottom:15px;
+}
+
+button{
+    background:green;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+button:hover{
+    background:darkgreen;
+}
+
+.info{
+    background:#eef;
+    padding:15px;
+    border-radius:5px;
+    margin-bottom:20px;
+}
+
+</style>
+
+<script>
+
+function toggleRouteFields(){
+
+    let category =
+        document.getElementById("passCategory").value;
+
+    let routeDiv =
+        document.getElementById("routeDiv");
+
+    if(category === "Fixed Route"){
+        routeDiv.style.display = "block";
+    }else{
+        routeDiv.style.display = "none";
+    }
+}
+
+</script>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Apply New Bus Pass</h2>
+
+<div class="info">
+
+<h3>Applicant Details</h3>
+
+<p>
+<b>Name:</b>
+<span th:text="${user.name}"></span>
+</p>
+
+<p>
+<b>Email:</b>
+<span th:text="${user.email}"></span>
+</p>
+
+<p>
+<b>User Type:</b>
+<span th:text="${user.userType}"></span>
+</p>
+
+<div th:if="${user.userType == 'Student'}">
+
+<p>
+<b>Institution Name:</b>
+<span th:text="${user.institutionName}"></span>
+</p>
+
+<p>
+<b>Institution Type:</b>
+<span th:text="${user.institutionType}"></span>
+</p>
+
+<p>
+<b>Class Level:</b>
+<span th:text="${user.classLevel}"></span>
+</p>
+
+</div>
+
+</div>
+
+<form action="/savePass" method="post">
+
+<label>Pass Type</label>
+
+<select name="passType" required>
+    <option value="">Select</option>
+    <option value="Monthly">Monthly</option>
+    <option value="Quarterly">Quarterly</option>
+    <option value="Half-Yearly">Half-Yearly</option>
+</select>
+
+<div th:if="${user.userType == 'Passenger'}">
+
+<label>Pass Category</label>
+
+<select name="passCategory"
+        id="passCategory"
+        onchange="toggleRouteFields()">
+
+    <option value="General">General</option>
+    <option value="Fixed Route">Fixed Route</option>
+
+</select>
+
+<div id="routeDiv" style="display:none;">
+
+<label>Source</label>
+<input type="text"
+       name="source">
+
+<label>Destination</label>
+<input type="text"
+       name="destination">
+
+<label>Route Number</label>
+<input type="text"
+       name="route">
+
+</div>
+
+</div>
+
+<center>
+<button type="submit">
+Apply Pass
+</button>
+</center>
+
+</form>
+
+</div>
+
+</body>
+</html>

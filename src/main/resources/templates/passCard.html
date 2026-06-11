@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Bus Pass Card</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+}
+
+.card{
+    width:800px;
+    margin:auto;
+    background:white;
+    border:2px solid black;
+}
+
+.top-section{
+    display:flex;
+    justify-content:space-between;
+    padding:20px;
+}
+
+.left{
+    width:70%;
+}
+
+.right{
+    width:25%;
+    text-align:center;
+}
+
+.right img{
+    width:150px;
+    height:180px;
+    border:1px solid black;
+}
+
+.row{
+    margin-bottom:10px;
+}
+
+.heading{
+    text-align:center;
+    background:#003366;
+    color:white;
+    padding:10px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.bottom-section{
+    padding:20px;
+}
+
+.bottom-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.validity{
+    text-align:center;
+    margin-top:20px;
+}
+
+.validity h2{
+    color:red;
+    margin-bottom:5px;
+}
+
+.validity-date{
+    font-size:28px;
+    font-weight:bold;
+    color:green;
+}
+
+.print-btn{
+    text-align:center;
+    margin-top:20px;
+}
+
+button{
+    padding:10px 20px;
+    background:#0066cc;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="top-section">
+
+
+<div class="left">
+
+<div class="row">
+<b>Pass ID :</b>
+<span th:text="${user.passNumber}"></span>
+</div>
+
+<div class="row">
+<b>Name :</b>
+<span th:text="${user.name}"></span>
+</div>
+
+<div class="row">
+<b>Age :</b>
+<span th:text="${user.age}"></span>
+</div>
+
+<div class="row">
+<b>Date Of Birth :</b>
+<span th:text="${user.dateOfBirth}"></span>
+</div>
+
+<div class="row">
+<b>Phone :</b>
+<span th:text="${user.mobile}"></span>
+</div>
+
+<div class="row"
+th:if="${user.userType == 'Student'}">
+
+<b>Institute :</b>
+<span th:text="${user.institutionName}"></span>
+
+</div>
+
+<div class="row"
+th:if="${user.userType == 'Student'}">
+
+<b>Class / Year :</b>
+<span th:text="${user.classLevel}"></span>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<img th:src="@{'/uploads/' + ${user.photo}}"
+     alt="Photo">
+
+</div>
+
+</div>
+
+<div class="heading">
+
+<span th:if="${user.userType == 'Student'}">
+    STUDENT GENERAL PASS
+</span>
+
+<span th:if="${user.userType == 'Passenger' and user.passCategory == 'All Route'}">
+    GENERAL PASS
+</span>
+
+<span th:if="${user.userType == 'Passenger' and user.passCategory == 'Fixed Route'}">
+    ROUTE PASS
+</span>
+
+</div>
+
+<div class="bottom-section">
+
+<div class="bottom-row">
+
+<div>
+<b>Name :</b>
+<span th:text="${user.name}"></span>
+</div>
+
+<div>
+<b>Amount :</b>
+₹ <span th:text="${user.fee}"></span>
+</div>
+
+</div>
+
+<div class="bottom-row">
+
+<div>
+<b>Pass ID :</b>
+<span th:text="${user.passNumber}"></span>
+</div>
+
+<div>
+<b>User Type :</b>
+<span th:text="${user.userType}"></span>
+</div>
+
+</div>
+
+<div class="bottom-row">
+
+<div>
+<b>Pass Type :</b>
+<span th:text="${user.passType}"></span>
+</div>
+
+<div>
+<b>Category :</b>
+<span th:text="${user.passCategory}"></span>
+</div>
+
+</div>
+
+<div class="bottom-row"
+     th:if="${user.passCategory == 'Fixed Route'}">
+
+<div>
+<b>Source :</b>
+<span th:text="${user.source}"></span>
+</div>
+
+<div>
+<b>Destination :</b>
+<span th:text="${user.destination}"></span>
+</div>
+
+</div>
+
+<div class="validity">
+
+<h2>VALIDITY</h2>
+
+<div class="validity-date">
+
+<span th:text="${user.expiryDate}"></span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="print-btn">
+
+<button onclick="window.print()">
+Download / Print Pass
+</button>
+
+</div>
+
+</body>
+</html>

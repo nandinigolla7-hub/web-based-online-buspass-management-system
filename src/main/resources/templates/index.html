@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Bus Pass Renewal</title><
+<style>
+	body{
+	    background-image:url('/images/Rbus.jpg');
+	    background-size:cover;
+	    background-repeat:no-repeat;
+	    background-position:center;
+	    background-attachment:fixed;
+	}
+
+h1{
+    text-align:center;
+    color:#003366;
+}
+
+form{
+    width:450px;
+    margin:auto;
+}
+
+button{
+    background-color:#0066cc;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background-color:#004999;
+}
+
+a{
+    color:red;
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+</style>
+<script>
+	function toggleFields() {
+
+	    let userType =
+	        document.getElementById("userType").value;
+
+	    let studentSection =
+	        document.getElementById("studentSection");
+
+	    if(userType === "Student") {
+
+	        studentSection.style.display = "block";
+
+	    } else {
+
+	        studentSection.style.display = "none";
+	    }
+	}
+
+	window.onload = function() {
+
+	    toggleFields();
+	    togglePreviousPass();
+	};
+
+function togglePreviousPass() {
+
+    let type =
+        document.getElementById(
+            "applicationType").value;
+
+    let section =
+        document.getElementById(
+            "previousPassSection");
+
+    if(type === "Renewal") {
+
+        section.style.display = "block";
+
+    } else {
+
+        section.style.display = "none";
+    }
+}
+
+</script>
+</head>
+
+<body>
+	<div class="container">
+
+<h1>Online Bus Pass Renewal System</h1>
+<form action="/register"
+	        method="post"
+	        enctype="multipart/form-data">
+    Name:
+    <input type="text" name="name" required><br><br>
+	Date of Birth:
+	<input type="date" name="dateOfBirth" required>
+
+	<br><br>
+
+	Age:
+	<input type="number" name="age" required>
+
+	<br><br>
+
+    Email:
+    <input type="email" name="email" required><br><br>
+
+    Mobile:
+	<input type="tel"
+	       name="mobile"
+	       pattern="[0-9]{10}"
+	       maxlength="10"
+	       required
+	       title="Mobile number must be exactly 10 digits">
+		   <br><br>
+
+    Password:
+    <input type="password" name="password" required><br><br>
+	User Type:
+
+	<select id="userType" name="userType"
+	        onchange="toggleFields()">
+
+	    <option value="Student">Student</option>
+	    <option value="Passenger">Passenger</option>
+
+	</select>
+	<div id="studentSection">
+		<br><br>
+
+	    Institution Type:
+
+	    <select name="institutionType">
+	        <option value="School">School</option>
+	        <option value="College">College</option>
+	    </select>
+
+	    <br><br>
+
+	    Institution Name:
+
+	    <input type="text" name="institutionName" required>
+
+	    <br><br>
+
+	    Institution Area:
+
+	    <input type="text" name="institutionArea">
+
+	    <br><br>
+
+	    Institution Code:
+
+	    <input type="text" name="institutionCode">
+
+	    <br><br>
+
+	    Class / Year:
+
+	    <input type="number" name="classLevel" required>
+
+	    <br><br>
+
+	</div>
+
+	Pass Type:
+
+	<select name="passType">
+
+	    <option value="Monthly">Monthly</option>
+
+	    <option value="Quarterly">Quarterly</option>
+
+	</select>
+	<br><br>
+	Photo:
+	    <input type="file"
+	           name="photofile"
+	           accept="image/*"
+	           required>
+	    <br><br>
+
+
+    <button type="submit">Register</button>
+
+</form>
+<br>
+</form>
+
+<br>
+
+<div style="text-align:center;">
+
+    <a href="/login"><b>Already Registered?<b></a>
+
+    &nbsp;
+
+    <a href="/login"><b>Login Here<b>/a>
+
+    <br><br>
+
+    <a href="/adminLogin"><b>Admin Login</b></a>
+
+</div>
+
+
+</body>
+</html>

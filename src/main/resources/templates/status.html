@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Pass Status</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+	background-image:url('/images/bus2.jpg');
+			background-size:cover;
+				    background-repeat:no-repeat;
+				    background-position:center;
+				    background-attachment:fixed;
+}
+
+.container{
+    width:700px;
+    margin:50px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+}
+
+h2{
+    text-align:center;
+    color:#0d6efd;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+td{
+    padding:12px;
+    border:1px solid #ddd;
+}
+
+.label{
+    font-weight:bold;
+    background:#f8f9fa;
+}
+
+.approved{
+    color:green;
+    font-weight:bold;
+}
+
+.pending{
+    color:orange;
+    font-weight:bold;
+}
+
+.rejected{
+    color:red;
+    font-weight:bold;
+}
+
+.btn{
+    display:inline-block;
+    padding:10px 20px;
+    text-decoration:none;
+    border-radius:5px;
+    color:white;
+    margin-top:20px;
+}
+
+.download{
+    background:green;
+}
+
+.home{
+    background:#0d6efd;
+}
+
+.center{
+    text-align:center;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Bus Pass Status</h2>
+
+<table>
+
+<tr>
+<td class="label">Name</td>
+<td th:text="${user.name}"></td>
+</tr>
+
+<tr>
+<td class="label">Email</td>
+<td th:text="${user.email}"></td>
+</tr>
+
+<tr>
+<td class="label">Pass Number</td>
+<td th:text="${user.passNumber}"></td>
+</tr>
+
+<tr>
+<td class="label">User Type</td>
+<td th:text="${user.userType}"></td>
+</tr>
+
+<tr>
+<td class="label">Pass Type</td>
+<td th:text="${user.passType}"></td>
+</tr>
+
+<tr>
+<td class="label">Issue Date</td>
+<td th:text="${user.issueDate}"></td>
+</tr>
+
+<tr>
+<td class="label">Expiry Date</td>
+<td th:text="${user.expiryDate}"></td>
+</tr>
+
+<tr>
+<td class="label">Status</td>
+<td>
+
+<span th:if="${user.approvalStatus=='Approved'}"
+      class="approved">
+      Approved
+</span>
+
+<span th:if="${user.approvalStatus=='Pending Faculty Approval'}"
+      class="pending">
+      Pending Faculty Approval
+</span>
+
+<span th:if="${user.approvalStatus=='Rejected'}"
+      class="rejected">
+      Rejected
+</span>
+
+</td>
+</tr>
+
+</table>
+
+<div class="center">
+
+<a href="/dashboard"
+   class="btn home">
+   Back to Dashboard
+</a>
+
+<a th:if="${user.approvalStatus=='Approved'}"
+   th:href="@{/passCard/{id}(id=${user.id})}"
+   class="btn download">
+   Download Pass
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

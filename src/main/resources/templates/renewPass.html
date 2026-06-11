@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Renew Bus Pass</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+	background-image:url('/images/bus4.jpg');
+			background-size:cover;
+				    background-repeat:no-repeat;
+				    background-position:center;
+				    background-attachment:fixed;
+}
+
+h1{
+    text-align:center;
+    color:#003366;
+}
+
+form{
+    width:350px;
+    margin:auto;
+}
+
+button{
+    background-color:#0066cc;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background-color:#004999;
+}
+
+a{
+    color:#0066cc;
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Bus Pass Renewal</h1>
+
+<form action="/submitRenewal" method="post">
+
+    Previous Pass ID:
+    <input type="text"
+           name="passNumber"
+           required>
+
+    <br><br>
+
+    Pass Type:
+    <select name="passType">
+        <option value="Monthly">Monthly</option>
+        <option value="Quarterly">Quarterly</option>
+        <option value="Half-Yearly">Half-Yearly</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">
+        Renew Pass
+    </button>
+
+</form>
+
+<br>
+
+<div style="text-align:center;">
+
+    <a href="/dashboard">Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

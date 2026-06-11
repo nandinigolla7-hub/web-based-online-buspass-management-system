@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Admin Login</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+	background-image:url('/images/bus2.jpg');
+	background-size:cover;
+					    background-repeat:no-repeat;
+					    background-position:center;
+					    background-attachment:fixed;
+    text-align: center;
+}
+
+h2{
+    color: #003366;
+}
+
+form{
+    display: inline-block;
+    text-align: left;
+}
+
+input{
+    padding: 5px;
+}
+
+button{
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #004999;
+}
+
+p{
+    color: red;
+    font-weight: bold;
+}
+
+</style>
+
+</head>
+<body>
+
+<h2>Admin Login</h2>
+
+<form action="/adminLogin" method="post">
+
+    Username:
+    <input type="text" name="username">
+
+    <br><br>
+
+    Password:
+    <input type="password" name="password">
+
+    <br><br>
+
+    <button type="submit">Login</button>
+
+</form>
+
+<p style="color:red" th:text="${error}"></p>
+
+</body>
+</html>

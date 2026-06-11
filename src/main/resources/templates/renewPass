@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Renew Pass</title>
+</head>
+<body>
+
+<h2>Renew Bus Pass</h2>
+
+<form action="/submitRenewal" method="post">
+
+    Email:
+    <input type="email" name="email"><br><br>
+
+    Pass Type:
+    <select name="passType">
+        <option>Monthly</option>
+        <option>Quarterly</option>
+    </select>
+
+    <br><br>
+
+    Expiry Date:
+    <input type="date" name="expiryDate">
+
+    <br><br>
+
+    <button type="submit">Submit Renewal</button>
+
+</form>
+
+</body>
+</html>

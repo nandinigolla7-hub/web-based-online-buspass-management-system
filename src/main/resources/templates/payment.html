@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Bus Pass Payment</title>
+
+<style>
+body{
+	background-image:url('/images/bus4.jpg');
+			background-size:cover;
+				    background-repeat:no-repeat;
+				    background-position:center;
+				    background-attachment:fixed;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    margin-top:50px;
+}
+
+.container{
+    width:400px;
+    margin:auto;
+    border:1px solid #ccc;
+	background:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+button{
+    background-color:green;
+    color:white;
+    padding:10px 20px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Bus Pass Payment</h2>
+
+<hr>
+
+<p>
+<b>Name:</b>
+<span th:text="${user.name}"></span>
+</p>
+
+<p>
+<b>User Type:</b>
+<span th:text="${user.userType}"></span>
+</p>
+
+<p>
+<b>Pass Type:</b>
+<span th:text="${user.passType}"></span>
+</p>
+
+<p>
+<b>Amount to Pay:</b>
+₹<span th:text="${user.fee}"></span>
+</p>
+
+<hr>
+
+<form action="/paymentSuccess" method="post">
+
+    Card Number:
+	<input type="text"
+	       name="cardNumber"
+	       pattern="[0-9]{16}"
+	       maxlength="16"
+	       required
+	       title="Card number must be exactly 16 digits">
+		   <br><br>
+
+	Expiry Year:
+	<select required>
+	    <option>2026</option>
+	    <option>2027</option>
+	    <option>2028</option>
+	    <option>2029</option>
+	    <option>2030</option>
+	    <option>2031</option>
+	    <option>2032</option>
+	    <option>2033</option>
+	    <option>2034</option>
+	    <option>2035</option>
+	</select>
+	CVV:
+	<input type="password"
+	       name="cvv"
+	       pattern="[0-9]{3}"
+	       maxlength="3"
+	       required
+	       title="CVV must be exactly 3 digits">
+    <br><br>
+
+    <button type="submit">
+        Pay Now
+    </button>
+
+</form>
+
+</div>
+
+</body>
+</html>
