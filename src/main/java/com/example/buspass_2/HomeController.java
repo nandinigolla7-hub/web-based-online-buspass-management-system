@@ -28,6 +28,7 @@ public class HomeController {
 
         return "home";
     }
+    //postmapping
     @PostMapping("/register")
     public String register(User user,
             @RequestParam(value = "photofile", required = false)
