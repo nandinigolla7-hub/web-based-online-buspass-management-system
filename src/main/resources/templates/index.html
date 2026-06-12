@@ -75,22 +75,31 @@ a:hover{
 	    let studentSection =
 	        document.getElementById("studentSection");
 
+	    let institutionName =
+	        document.querySelector("[name='institutionName']");
+
+	    let classLevel =
+	        document.querySelector("[name='classLevel']");
+
 	    if(userType === "Student") {
 
 	        studentSection.style.display = "block";
 
+	        institutionName.required = true;
+	        classLevel.required = true;
+
 	    } else {
 
 	        studentSection.style.display = "none";
+
+	        institutionName.required = false;
+	        classLevel.required = false;
 	    }
 	}
 
 	window.onload = function() {
-
 	    toggleFields();
-	    togglePreviousPass();
 	};
-
 function togglePreviousPass() {
 
     let type =
