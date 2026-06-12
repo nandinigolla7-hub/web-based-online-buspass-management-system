@@ -148,11 +148,8 @@ function calculateAge() {
 
     if(dob === "") return;
 
-    let birthDate =
-        new Date(dob);
-
-    let today =
-        new Date();
+    let birthDate = new Date(dob);
+    let today = new Date();
 
     let age =
         today.getFullYear() -
@@ -170,7 +167,16 @@ function calculateAge() {
     }
 
     document.getElementById("age").value = age;
-}	
+
+    if(age < 6) {
+
+        alert("Bus Pass is available only for students/passengers above 6 years.");
+
+        document.getElementById("dob").value = "";
+        document.getElementById("age").value = "";
+    }
+}
+	
 function togglePassword() {
 
 	    let passwordField =
@@ -196,6 +202,9 @@ function togglePassword() {
 	<div class="container">
 
 <h1>Online Bus Pass Renewal System</h1>
+		<p style="color:red"
+   th:text="${error}">
+</p>
 <form action="/register"
       method="post"
       enctype="multipart/form-data">
