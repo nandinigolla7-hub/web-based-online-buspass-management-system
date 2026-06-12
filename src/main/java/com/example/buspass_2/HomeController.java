@@ -1,7 +1,7 @@
 package com.example.buspass_2;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +16,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import jakarta.servlet.http.HttpSession;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 
 @Controller
 public class HomeController {
 
     @Autowired
     private UserRepository repo;
+	private CrudRepository<User, Long> userRepository;
+	private Model model;
 
     @GetMapping("/")
     public String home() {
@@ -80,6 +84,14 @@ public class HomeController {
             if(!existingUsers.isEmpty()) {
 
                 return "emailExists";
+            }
+            if(user.getAge() < 6) {
+
+                model.addAttribute(
+                    "error",
+                    "Bus Pass is available only for users above 6 years.");
+
+                return "register";
             }
 
             repo.save(user);
@@ -712,5 +724,4 @@ public String dashboard(HttpSession session,
     model.addAttribute("name", user.getName());
 
     return "dashboard";
-}
-        }
+}   }
