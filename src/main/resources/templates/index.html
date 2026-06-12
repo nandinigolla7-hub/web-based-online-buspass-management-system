@@ -65,6 +65,27 @@ a:hover{
 #studentSection{
     margin-left:0;
 }
+.required{
+    color:red;
+}
+.password-container{
+    position:relative;
+    display:inline-block;
+}
+
+.password-container input{
+    width:220px;
+    padding-right:35px;
+}
+
+.password-container span{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    user-select:none;
+}
 </style>
 <script>
 	function toggleFields() {
@@ -120,6 +141,54 @@ function togglePreviousPass() {
     }
 }
 
+function calculateAge() {
+
+    let dob =
+        document.getElementById("dob").value;
+
+    if(dob === "") return;
+
+    let birthDate =
+        new Date(dob);
+
+    let today =
+        new Date();
+
+    let age =
+        today.getFullYear() -
+        birthDate.getFullYear();
+
+    let monthDiff =
+        today.getMonth() -
+        birthDate.getMonth();
+
+    if(monthDiff < 0 ||
+       (monthDiff === 0 &&
+        today.getDate() < birthDate.getDate())) {
+
+        age--;
+    }
+
+    document.getElementById("age").value = age;
+}	
+function togglePassword() {
+
+	    let passwordField =
+	        document.getElementById("password");
+
+	    if(passwordField.type === "password") {
+
+	        passwordField.type = "text";
+
+	    } else {
+
+	        passwordField.type = "password";
+	    }
+	}
+
+	
+
+
 </script>
 </head>
 
@@ -131,19 +200,29 @@ function togglePreviousPass() {
       method="post"
       enctype="multipart/form-data">
 
-    <label>Name :</label>
+    <label>Name :<span class="required">*</span></label>
     <input type="text" name="name" required>
     <br><br>
 
-    <label>Date of Birth :</label>
-    <input type="date" name="dateOfBirth" required>
-    <br><br>
+    <label>Date of Birth :<span class="required">*</span></label>
+	<input type="date"
+		       id="dob"
+		       name="dateOfBirth"
+		       onchange="calculateAge()"
+		       required><br><br>
+    
 
-    <label>Age :</label>
-    <input type="number" name="age" required>
-    <br><br>
+    <label>Age :<span class="required">*</span></label>
+	<input type="number"
+	       id="age"
+	       name="age"
+	       readonly
+	       required>
 
-    <label>Email :</label>
+	<br><br>
+	
+
+    <label>Email :<span class="required">*</span></label>
     <input type="email" name="email" required>
     <br><br>
 
@@ -156,11 +235,19 @@ function togglePreviousPass() {
            title="Mobile number must be exactly 10 digits">
     <br><br>
 
-    <label>Password :</label>
-    <input type="password" name="password" required>
-    <br><br>
+    <label>Password :<span class="required">*</span></label>
+	<div class="password-container">
 
-    <label>User Type :</label>
+	    <input type="password"
+	           id="password"
+	           name="password"
+	           required>
+
+	    <span onclick="togglePassword()">👁️</span>
+
+	</div>
+	<br><br>
+    <label>User Type :<span class="required">*</span></label>
     <select id="userType"
             name="userType"
             onchange="toggleFields()">
@@ -180,7 +267,7 @@ function togglePreviousPass() {
 
         <br><br>
 
-        <label>Institution Name :</label>
+        <label>Institution Name :<span class="required">*</span></label>
         <input type="text"
                name="institutionName"
                required>
@@ -199,7 +286,7 @@ function togglePreviousPass() {
 
         <br><br>
 
-        <label>Class / Year :</label>
+        <label>Class / Year :<span class="required">*</span></label>
         <input type="number"
                name="classLevel"
                required>
@@ -212,11 +299,12 @@ function togglePreviousPass() {
     <select name="passType">
         <option value="Monthly">Monthly</option>
         <option value="Quarterly">Quarterly</option>
+		<option value="Half Yearly">Half Yearly</option>
     </select>
 
     <br><br>
 
-    <label>Photo :</label>
+    <label>Photo :<span class="required">*</span></label>
     <input type="file"
            name="photofile"
            accept="image/*"
