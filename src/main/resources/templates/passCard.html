@@ -233,7 +233,10 @@ th:if="${user.userType == 'Student'}">
 </div>
 
 <div class="validity">
-
+	<img th:src="@{'https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=PassID:' + ${user.passNumber} + ',Name:' + ${user.name}}"
+	     width="120"
+	     height="120"
+	     alt="QR Code">
 <h2>VALIDITY</h2>
 
 <div class="validity-date">

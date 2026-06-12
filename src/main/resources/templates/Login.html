@@ -79,8 +79,41 @@ button:hover{
 a{
     text-decoration:none;
 }
+.password-container{
+    position:relative;
+    display:inline-block;
+}
+
+.password-container input{
+    width:220px;
+    padding-right:35px;
+}
+
+.password-container span{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    user-select:none;
+}
+	</style>
 
 </style>
+<script>function togglePassword() {
+
+    let passwordField =
+        document.getElementById("password");
+
+    if(passwordField.type === "password") {
+
+        passwordField.type = "text";
+
+    } else {
+
+        passwordField.type = "password";
+    }
+}</script>
 </head>
 <body>
 
@@ -95,10 +128,12 @@ a{
 	           placeholder="Enter Email"
 	           required>
 
-	    <input type="password"
-	           name="password"
-	           placeholder="Enter Password"
-	           required>
+			   <input type="password"
+			   	           id="password"
+			   	           name="password"
+			   	           required>
+
+			   	    <span onclick="togglePassword()">👁️</span>
 
 	    <button type="submit">
 	        Login
