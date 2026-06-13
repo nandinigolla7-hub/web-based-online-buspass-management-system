@@ -43,6 +43,10 @@ public class User {
     private String otp;
     private LocalDate otpExpiry;
     private String applicationType;
+	private String specification;
+private String branch;
+private String collegeYear;
+
 
     public Double getFee() {
         return fee;
@@ -294,5 +298,28 @@ public class User {
 	public void setApplicationType(String applicationType) {
 		this.applicationType = applicationType;
 	}
+	public String getSpecification() {
+    return specification;
+}
+
+public void setSpecification(String specification) {
+    this.specification = specification;
+}
+
+public String getBranch() {
+    return branch;
+}
+
+public void setBranch(String branch) {
+    this.branch = branch;
+}
+
+public String getCollegeYear() {
+    return collegeYear;
+}
+
+public void setCollegeYear(String collegeYear) {
+    this.collegeYear = collegeYear;
+}
    
 }
