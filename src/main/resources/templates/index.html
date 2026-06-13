@@ -160,7 +160,106 @@ function togglePreviousPass() {
         section.style.display = "none";
     }
 }
+	function calculateAge() {
 
+    let dob =
+        document.getElementById("dob").value;
+
+    if(dob === "") return;
+
+    let birthDate = new Date(dob);
+    let today = new Date();
+
+    let age =
+        today.getFullYear() -
+        birthDate.getFullYear();
+
+    let monthDiff =
+        today.getMonth() -
+        birthDate.getMonth();
+
+    if(monthDiff < 0 ||
+       (monthDiff === 0 &&
+        today.getDate() < birthDate.getDate())) {
+
+        age--;
+    }
+
+    document.getElementById("age").value = age;
+
+    if(age < 6) {
+
+        alert("Bus Pass is available only for students/passengers above 6 years.");
+
+        document.getElementById("dob").value = "";
+        document.getElementById("age").value = "";
+    }
+}
+	function updateBranches(){
+
+    let spec =
+        document.getElementById("specification").value;
+
+    let branch =
+        document.getElementById("branch");
+
+    branch.innerHTML = "";
+
+    if(spec === "UG"){
+
+        branch.innerHTML += "<option value='B.Sc'>B.Sc</option>";
+        branch.innerHTML += "<option value='B.Com'>B.Com</option>";
+        branch.innerHTML += "<option value='BBA'>BBA</option>";
+        branch.innerHTML += "<option value='BA'>BA</option>";
+
+    }else if(spec === "PG"){
+
+        branch.innerHTML += "<option value='MCA'>MCA</option>";
+        branch.innerHTML += "<option value='MBA'>MBA</option>";
+        branch.innerHTML += "<option value='M.Sc'>M.Sc</option>";
+        branch.innerHTML += "<option value='M.Com'>M.Com</option>";
+
+    }else if(spec === "BTECH"){
+
+        branch.innerHTML += "<option value='CSE'>CSE</option>";
+        branch.innerHTML += "<option value='ECE'>ECE</option>";
+        branch.innerHTML += "<option value='EEE'>EEE</option>";
+        branch.innerHTML += "<option value='IT'>IT</option>";
+        branch.innerHTML += "<option value='MECH'>MECH</option>";
+        branch.innerHTML += "<option value='CIVIL'>CIVIL</option>";
+    }
+}function toggleInstitutionFields() {
+
+	    let type =
+	        document.getElementById(
+	            "institutionType").value;
+
+	    if(type === "College") {
+
+	        document.getElementById(
+	            "collegeFields").style.display = "block";
+
+	        document.getElementById(
+	            "schoolFields").style.display = "none";
+
+	    } else {
+
+	        document.getElementById(
+	            "collegeFields").style.display = "none";
+
+	        document.getElementById(
+	            "schoolFields").style.display = "block";
+	    }
+	}
+
+	window.onload = function() {
+
+	    toggleFields();
+
+	    toggleInstitutionFields();
+
+	    updateBranches();
+	};
 </script>
 </head>
 
@@ -288,9 +387,8 @@ function togglePreviousPass() {
 		  </div> 
 	  </div> 
   </div> 
-  <div style="text-align:center;margin-top:20px;"> 
-	<button type="submit"> Register </button> 
-</div> </form>
+ <div style="text-align:center;">
+
     <a href="/login"><b>Already Registered?<b></a>
 
     &nbsp;
@@ -302,7 +400,6 @@ function togglePreviousPass() {
     <a href="/adminLogin"><b>Admin Login</b></a>
 
 </div>
-
 
 </body>
 </html>
