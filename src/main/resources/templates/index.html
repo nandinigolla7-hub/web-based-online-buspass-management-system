@@ -251,6 +251,15 @@ function togglePreviousPass() {
 	            "schoolFields").style.display = "block";
 	    }
 	}
+	function togglePassword() {
+    let password = document.getElementById("password");
+
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+}
 
 	window.onload = function() {
 
