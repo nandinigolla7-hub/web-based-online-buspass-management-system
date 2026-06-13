@@ -1,4 +1,5 @@
 package com.example.buspass_2;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +42,7 @@ public class User {
     private Integer age;
     private String otp;
     private LocalDate otpExpiry;
+    private String applicationType;
 
     public Double getFee() {
         return fee;
@@ -283,6 +285,14 @@ public class User {
 
 	public void setOtpExpiry(LocalDate otpExpiry) {
 		this.otpExpiry = otpExpiry;
+	}
+
+	public String getApplicationType() {
+		return applicationType;
+	}
+
+	public void setApplicationType(String applicationType) {
+		this.applicationType = applicationType;
 	}
    
 }

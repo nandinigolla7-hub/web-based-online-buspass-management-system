@@ -25,6 +25,25 @@ form{
     border-radius:10px;
     box-shadow:0 0 10px gray;
 }
+.form-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.form-group{
+    width:48%;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:5px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+}
 
 label{
     display:inline-block;
@@ -40,6 +59,7 @@ select{
 }
 
 button{
+	text-align:center;
     background-color:#0066cc;
     color:white;
     border:none;
@@ -141,6 +161,7 @@ function togglePreviousPass() {
     }
 }
 
+
 function calculateAge() {
 
     let dob =
@@ -148,11 +169,8 @@ function calculateAge() {
 
     if(dob === "") return;
 
-    let birthDate =
-        new Date(dob);
-
-    let today =
-        new Date();
+    let birthDate = new Date(dob);
+    let today = new Date();
 
     let age =
         today.getFullYear() -
@@ -170,7 +188,16 @@ function calculateAge() {
     }
 
     document.getElementById("age").value = age;
-}	
+
+    if(age < 6) {
+
+        alert("Bus Pass is available only for students/passengers above 6 years.");
+
+        document.getElementById("dob").value = "";
+        document.getElementById("age").value = "";
+    }
+}
+	
 function togglePassword() {
 
 	    let passwordField =
@@ -184,7 +211,73 @@ function togglePassword() {
 
 	        passwordField.type = "password";
 	    }
+}
+function updateBranches(){
+
+    let spec =
+        document.getElementById("specification").value;
+
+    let branch =
+        document.getElementById("branch");
+
+    branch.innerHTML = "";
+
+    if(spec === "UG"){
+
+        branch.innerHTML += "<option value='B.Sc'>B.Sc</option>";
+        branch.innerHTML += "<option value='B.Com'>B.Com</option>";
+        branch.innerHTML += "<option value='BBA'>BBA</option>";
+        branch.innerHTML += "<option value='BA'>BA</option>";
+
+    }else if(spec === "PG"){
+
+        branch.innerHTML += "<option value='MCA'>MCA</option>";
+        branch.innerHTML += "<option value='MBA'>MBA</option>";
+        branch.innerHTML += "<option value='M.Sc'>M.Sc</option>";
+        branch.innerHTML += "<option value='M.Com'>M.Com</option>";
+
+    }else if(spec === "BTECH"){
+
+        branch.innerHTML += "<option value='CSE'>CSE</option>";
+        branch.innerHTML += "<option value='ECE'>ECE</option>";
+        branch.innerHTML += "<option value='EEE'>EEE</option>";
+        branch.innerHTML += "<option value='IT'>IT</option>";
+        branch.innerHTML += "<option value='MECH'>MECH</option>";
+        branch.innerHTML += "<option value='CIVIL'>CIVIL</option>";
+    }
+}
+	function toggleInstitutionFields() {
+
+	    let type =
+	        document.getElementById(
+	            "institutionType").value;
+
+	    if(type === "College") {
+
+	        document.getElementById(
+	            "collegeFields").style.display = "block";
+
+	        document.getElementById(
+	            "schoolFields").style.display = "none";
+
+	    } else {
+
+	        document.getElementById(
+	            "collegeFields").style.display = "none";
+
+	        document.getElementById(
+	            "schoolFields").style.display = "block";
+	    }
 	}
+
+	window.onload = function() {
+
+	    toggleFields();
+
+	    toggleInstitutionFields();
+
+	    updateBranches();
+	};
 
 	
 
@@ -196,125 +289,133 @@ function togglePassword() {
 	<div class="container">
 
 <h1>Online Bus Pass Renewal System</h1>
-<form action="/register"
-      method="post"
-      enctype="multipart/form-data">
-
-    <label>Name :<span class="required">*</span></label>
-    <input type="text" name="name" required>
-    <br><br>
-
-    <label>Date of Birth :<span class="required">*</span></label>
-	<input type="date"
-		       id="dob"
-		       name="dateOfBirth"
-		       onchange="calculateAge()"
-		       required><br><br>
-    
-
-    <label>Age :<span class="required">*</span></label>
-	<input type="number"
-	       id="age"
-	       name="age"
-	       readonly
-	       required>
-
-	<br><br>
-	
-
-    <label>Email :<span class="required">*</span></label>
-    <input type="email" name="email" required>
-    <br><br>
-
-    <label>Mobile :</label>
-    <input type="tel"
-           name="mobile"
-           pattern="[0-9]{10}"
-           maxlength="10"
-           required
-           title="Mobile number must be exactly 10 digits">
-    <br><br>
-
-    <label>Password :<span class="required">*</span></label>
-	<div class="password-container">
-
-	    <input type="password"
-	           id="password"
-	           name="password"
-	           required>
-
-	    <span onclick="togglePassword()">👁️</span>
-
-	</div>
-	<br><br>
-    <label>User Type :<span class="required">*</span></label>
-    <select id="userType"
-            name="userType"
-            onchange="toggleFields()">
-        <option value="Student">Student</option>
-        <option value="Passenger">Passenger</option>
-    </select>
-
-    <br><br>
-
-    <div id="studentSection">
-
-        <label>Institution Type :</label>
-        <select name="institutionType">
-            <option value="School">School</option>
-            <option value="College">College</option>
-        </select>
-
-        <br><br>
-
-        <label>Institution Name :<span class="required">*</span></label>
-        <input type="text"
-               name="institutionName"
-               required>
-
-        <br><br>
-
-        <label>Institution Area :</label>
-        <input type="text"
-               name="institutionArea">
-
-        <br><br>
-
-        <label>Institution Code :</label>
-        <input type="text"
-               name="institutionCode">
-
-        <br><br>
-
-        <label>Class / Year :<span class="required">*</span></label>
-        <input type="number"
-               name="classLevel"
-               required>
-
-        <br><br>
-
-    </div>
-
-    <label>Pass Type :</label>
-    <select name="passType">
-        <option value="Monthly">Monthly</option>
-        <option value="Quarterly">Quarterly</option>
-		<option value="Half Yearly">Half Yearly</option>
-    </select>
-
-    <br><br>
-
-    <label>Photo :<span class="required">*</span></label>
-    <input type="file"
-           name="photofile"
-           accept="image/*"
-           required>
-
-    <br><br>
-
-    <button type="submit">Register</button>
-
-</form>
+<p style="color:red"
+   th:text="${error}">
+</p>
+<form action="/register" method="post" enctype="multipart/form-data">
+	 <div class="form-row"> <div class="form-group">
+		 <label>Name : <span class="required">*</span></label> 
+		 <input type="text" name="name" required> </div> 
+		 <div class="form-group">
+			 <label>Date of Birth : <span class="required">*</span></label>
+			  <input type="date" id="dob" name="dateOfBirth" onchange="calculateAge()" required>
+			   </div> 
+		   </div>
+		    <div class="form-row"> 
+				<div class="form-group"> 
+					<label>Age : <span class="required">*</span></label> 
+					<input type="number" id="age" name="age" readonly required> 
+				</div> 
+				<div class="form-group"> 
+					<label>Email : <span class="required">*</span></label>
+					 <input type="email" name="email" required>
+				  </div> 
+			  </div> 
+			  <div class="form-row"> 
+				<div class="form-group"> 
+					<label>Mobile : <span class="required">*</span></label>
+					 <input type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10" required> 
+				 </div> <div class="form-group">
+					 <label>Password : <span class="required">*</span></label> 
+					 <div class="password-container"> 
+						<input type="password" id="password" name="password" required> <span onclick="togglePassword()">👁️</span> 
+						</div>
+					 </div>
+				  </div> 
+				  <div class="form-row"> 
+					<div class="form-group"> <label>User Type :</label>
+						 <select id="userType" name="userType" onchange="toggleFields()"> 
+						 <option value="Student">Student</option> 
+						 <option value="Passenger">Passenger</option>
+					  </select>
+				   </div> 
+				   <div class="form-group"> 
+					<label>Pass Type :</label> 
+					<select name="passType">
+						 <option value="Monthly">Monthly</option>
+						  <option value="Quarterly">Quarterly</option> 
+						  <option value="Half Yearly">Half Yearly</option>
+					   </select>
+				    </div>
+				 </div>
+				  <div id="studentSection">
+					 <div class="form-row"> 
+						
+						<div class="form-group"> <label>Institution Type :</label> 
+			   <select id="institutionType" name="institutionType" onchange="toggleInstitutionFields()"> 
+			   <option value="School">School</option> 
+			   <option value="College">College</option> 
+		   </select> 
+	   </div>
+	    <div class="form-group"> <label>Institution Name :</label>
+			 <input type="text" name="institutionName">
+		  </div> 
+	  </div> 
+	  <div class="form-row"> 
+		<div class="form-group">
+			 <label>Institution Area :</label> 
+			 <input type="text" name="institutionArea">
+		  </div> 
+		  <div class="form-group">
+			 <label>Institution Code :</label>
+			  <input type="text" name="institutionCode"> 
+		  </div> 
+	  </div>
+	   <div id="schoolFields"> 
+		<div class="form-row">
+			 <div class="form-group"> <label>Class :</label> 
+				<select name="classLevel"> 
+					<option value="1st Class">1st Class</option> 
+					<option value="2nd Class">2nd Class</option>
+					 <option value="3rd Class">3rd Class</option> 
+					 <option value="4th Class">4th Class</option> 
+					 <option value="5th Class">5th Class</option>
+					  <option value="6th Class">6th Class</option> 
+					  <option value="7th Class">7th Class</option> 
+					  <option value="8th Class">8th Class</option> 
+					  <option value="9th Class">9th Class</option> 
+					  <option value="10th Class">10th Class</option>
+				   </select> 
+			   </div> 
+		   </div> 
+	   </div> 
+	   <div id="collegeFields" style="display:none;"> 
+	   <div class="form-row"> <div class="form-group">
+		 <label>Specification :</label>
+		  <select id="specification" name="specification" onchange="updateBranches()">
+		  
+			 <option value="UG">Under Graduation</option> 
+			 <option value="PG">Post Graduation</option>
+			  <option value="BTECH">B.Tech</option>
+		   </select>
+	    </div>
+		 <div class="form-group"> 
+			<label>Branch :</label> 
+			<select id="branch" name="branch"> 
+				
+			</select>
+		 </div> 
+	 </div> 
+	 <div class="form-row"> 
+		<div class="form-group"> 
+			<label>Year :</label> 
+			<select name="collegeYear"> 
+				<option value="1st Year">1st Year</option> 
+				<option value="2nd Year">2nd Year</option>
+				 <option value="3rd Year">3rd Year</option>
+				  <option value="4th Year">4th Year</option>
+			   </select> </div> <div class="form-group">
+				 <label>Photo : <span class="required">*</span></label>
+				  <input type="file" name="photofile" accept="image/*" required> 
+			  </div> 
+		  </div> 
+	  </div> 
+  </div> 
+  <div style="text-align:center;margin-top:20px;"> 
+	<button type="submit"> Register </button> 
+</div>
+ </form>
+					 
 <div style="text-align:center;">
 
     <a href="/login"><b>Already Registered?<b></a>

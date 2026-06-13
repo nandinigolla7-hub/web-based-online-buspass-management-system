@@ -25,6 +25,7 @@ public class HomeController {
     @Autowired
     private UserRepository repo;
 	private CrudRepository<User, Long> userRepository;
+	private Model model;
 
     @GetMapping("/")
     public String home() {
@@ -84,6 +85,14 @@ public class HomeController {
 
                 return "emailExists";
             }
+            if(user.getAge() < 6) {
+
+                model.addAttribute(
+                    "error",
+                    "Bus Pass is available only for users above 6 years.");
+
+                return "register";
+            }
 
             repo.save(user);
 
@@ -127,6 +136,7 @@ public class HomeController {
             Model model) {
 
         User user = repo.findByPassNumber(passNumber);
+        user.setApplicationType("Renewal Pass");
 
         if(user == null) {
 
@@ -457,6 +467,7 @@ if(users.isEmpty()) {
 }
 
 User user = users.get(0);
+user.setApplicationType("New Pass");
 
 if(user == null) {
  model.addAttribute("error",
